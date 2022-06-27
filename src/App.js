@@ -1,5 +1,6 @@
 import React from 'react';
+import { Characters } from '@screens';
 
-const App = () => <h1>Hello world! I am using React</h1>;
+const App = () => <Characters />;
 
 export default App;
