@@ -22,5 +22,17 @@
       }
     ],
     "react/jsx-filename-extension": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@src", "./src"],
+          ["@components", "./src/components"],
+          ["@screens", "./src/screens"],
+          ["@redux", "./src/redux"]
+        ]
+      }
+    }
   }
 }

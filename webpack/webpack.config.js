@@ -10,6 +10,12 @@ module.exports = {
   target: 'web',
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      '@src': path.resolve(__dirname, '../src'),
+      '@components': path.resolve(__dirname, '../src', 'components'),
+      '@screens': path.resolve(__dirname, '../src', 'screens'),
+      '@redux': path.resolve(__dirname, '../src', 'redux'),
+    },
   },
   module: {
     rules: [
