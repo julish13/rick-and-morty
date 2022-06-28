@@ -1,14 +1,28 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchList } from '@redux/features/charactersSlice';
+import React, { useState } from 'react';
+import { useGetCharactersQuery } from '@redux';
 
+const initialPage = 1;
 const Characters = () => {
-  const dispatch = useDispatch();
-  const { activePage } = useSelector((state) => state.characters);
-  useEffect(() => {
-    dispatch(fetchList(activePage));
-  }, []);
-  return <h2>Characters</h2>;
+  const [page, setPage] = useState(initialPage);
+  const { data, isLoading, error } = useGetCharactersQuery(page);
+
+  if (isLoading) {
+    return <p>is Loading...</p>;
+  }
+  if (error) {
+    console.log(error);
+    return <p>error</p>;
+  }
+  return (
+    <>
+      <input value={page} onChange={(e) => setPage(e.target.value)} />
+      <ul>
+        {data.results.map(({ name }) => (
+          <li>{name}</li>
+        ))}
+      </ul>
+    </>
+  );
 };
 
 export default Characters;
