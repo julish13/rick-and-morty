@@ -15,6 +15,7 @@ module.exports = {
       '@components': path.resolve(__dirname, '../src', 'components'),
       '@screens': path.resolve(__dirname, '../src', 'screens'),
       '@redux': path.resolve(__dirname, '../src', 'redux'),
+      '@mui/styled-engine': '@mui/styled-engine-sc',
     },
   },
   module: {
