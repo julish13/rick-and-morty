@@ -8,7 +8,7 @@ const Characters = () => {
   useEffect(() => {
     dispatch(fetchList(activePage));
   }, []);
-  return <h1>Characters</h1>;
+  return <h2>Characters</h2>;
 };
 
 export default Characters;
