@@ -1,5 +1,5 @@
-/* eslint-disable import/prefer-default-export */
-import Characters from './Characters';
-import NotFound from './NotFound';
+import CharactersScreen from './CharactersScreen';
+import NotFoundScreen from './NotFoundScreen';
+import CharacterDetailsScreen from './CharacterDetailsScreen';
 
-export { Characters, NotFound };
+export { CharactersScreen, NotFoundScreen, CharacterDetailsScreen };

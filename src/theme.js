@@ -7,7 +7,7 @@ export default createTheme({
   palette: {
     background: {
       primary: '#FCF8E8',
-      secondary: '#FBA92C',
+      secondary: '#FFE17A',
       overlay: 'rgba(0.34, 0.34, 0.34, 0.6)',
     },
     text: {

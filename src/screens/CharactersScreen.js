@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useGetCharactersQuery } from '@redux';
-import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
+import { useSearchParams, useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { Pagination, CharactersList } from '@components';
 
-const Characters = () => {
+const CharactersScreen = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -36,17 +36,19 @@ const Characters = () => {
   }
 
   if (error) {
-    console.log(error);
     return <p>error</p>;
   }
 
   const { results, info } = data;
 
   return (
-    <Pagination pagesQuantity={info.pages} page={page} setPage={setPage}>
-      <CharactersList characters={results} />
-    </Pagination>
+    <>
+      <Pagination pagesQuantity={info.pages} page={page} setPage={setPage}>
+        <CharactersList characters={results} />
+      </Pagination>
+      <Outlet />
+    </>
   );
 };
 
-export default Characters;
+export default CharactersScreen;

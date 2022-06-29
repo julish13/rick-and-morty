@@ -7,7 +7,10 @@ export const charactersApi = createApi({
     getCharacters: build.query({
       query: (page = 1, query = '') => `?page=${page}${query ? `&${query}` : ''}`,
     }),
+    getCharacter: build.query({
+      query: (id) => id,
+    }),
   }),
 });
 
-export const { useGetCharactersQuery } = charactersApi;
+export const { useGetCharactersQuery, useGetCharacterQuery } = charactersApi;
