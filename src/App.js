@@ -1,6 +1,6 @@
-import React, { lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Layout } from '@components';
+import { Layout, LoadingSpinner } from '@components';
 
 const NotFound = lazy(() => import(/* webpackChunkName: "not-found" */ '@screens/NotFound.js'));
 const Characters = lazy(() =>
@@ -9,11 +9,13 @@ const Characters = lazy(() =>
 
 const App = () => (
   <Layout>
-    <Routes>
-      <Route path="/" element={<Navigate replace to="/characters" />} />
-      <Route path="characters" element={<Characters />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <Suspense fallback={<LoadingSpinner />}>
+      <Routes>
+        <Route path="/" element={<Navigate replace to="/characters" />} />
+        <Route path="characters" element={<Characters />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
   </Layout>
 );
 
