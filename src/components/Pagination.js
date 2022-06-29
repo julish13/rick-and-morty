@@ -3,11 +3,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { Pagination as MUIPagination, PaginationItem } from '@mui/material';
 
 const Pagination = ({ pagesQuantity, page, setPage, children }) => {
-  const { pathname } = useLocation();
   const paginationElement = (
     <MUIPagination
       count={pagesQuantity}
@@ -17,7 +16,7 @@ const Pagination = ({ pagesQuantity, page, setPage, children }) => {
       showLastButton
       sx={{ marginY: 3, marginX: 'auto' }}
       renderItem={(item) => (
-        <PaginationItem component={RouterLink} to={`${pathname}?page=${item.page}`} {...item} />
+        <PaginationItem component={RouterLink} to={`/?page=${item.page}`} {...item} />
       )}
     />
   );
