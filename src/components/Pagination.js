@@ -2,8 +2,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Link as RouterLink } from 'react-router-dom';
-import { Pagination as MUIPagination, PaginationItem, Stack } from '@mui/material';
+import { Pagination as MUIPagination, PaginationItem } from '@mui/material';
 
 const Pagination = ({ pagesQuantity, page, setPage, children }) => {
   const paginationElement = (
@@ -20,13 +21,18 @@ const Pagination = ({ pagesQuantity, page, setPage, children }) => {
     />
   );
   return (
-    <Stack spacing={2}>
+    <StyledPaginatioWrapper>
       {paginationElement}
       {children}
       {paginationElement}
-    </Stack>
+    </StyledPaginatioWrapper>
   );
 };
+
+const StyledPaginatioWrapper = styled('div')`
+  display: flex;
+  flex-direction: column;
+`;
 
 Pagination.propTypes = {
   pagesQuantity: PropTypes.number.isRequired,
