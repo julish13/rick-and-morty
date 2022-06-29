@@ -1,16 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { Container, Typography } from '@mui/material';
 
-const Layout = ({ children }) => (
-  <StyledContainer>
-    <Typography align="center" variant="h1" component="h1" gutterBottom>
-      Rick and Morty Characters
-    </Typography>
-    {children}
-  </StyledContainer>
-);
+const Layout = ({ children }) => {
+  const { t } = useTranslation();
+  return (
+    <StyledContainer>
+      <Typography align="center" variant="h1" component="h1" gutterBottom>
+        {t('title')}
+      </Typography>
+      {children}
+    </StyledContainer>
+  );
+};
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   minHeight: '100vh',

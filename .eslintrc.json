@@ -31,7 +31,8 @@
           ["@src", "./src"],
           ["@components", "./src/components"],
           ["@screens", "./src/screens"],
-          ["@redux", "./src/redux"]
+          ["@redux", "./src/redux"],
+          ["@lib", "./lib"]
         ]
       }
     }
