@@ -14,13 +14,13 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
   <Provider store={store}>
-    <I18nextProvider i18n={i18n}>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
+    <BrowserRouter>
+      <I18nextProvider i18n={i18n}>
+        <ThemeProvider theme={theme}>
           <CssBaseline />
           <App />
-        </BrowserRouter>
-      </ThemeProvider>
-    </I18nextProvider>
+        </ThemeProvider>
+      </I18nextProvider>
+    </BrowserRouter>
   </Provider>
 );
