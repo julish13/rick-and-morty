@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Characters, NotFound } from '@screens';
 import { Layout } from '@components';
+
+const NotFound = lazy(() => import(/* webpackChunkName: "not-found" */ '@screens/NotFound.js'));
+const Characters = lazy(() =>
+  import(/* webpackChunkName: "characters" */ '@screens/Characters.js')
+);
 
 const App = () => (
   <Layout>
