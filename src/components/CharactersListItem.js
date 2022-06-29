@@ -1,16 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { characterPropTypes } from '@lib/PropTypes/PropTypesValues';
 import { Typography } from '@mui/material';
 
-const CharactersListItem = ({ image, name }) => (
-    <StyledItem>
-      <StyledImage src={image} alt={name} loading="lazy" width="300" height="300" />
-      <StyledTypography variant="h2" component="h2">
-        {name}
-      </StyledTypography>
-    </StyledItem>
-  );
+const CharactersListItem = ({ character }) => (
+  <StyledItem>
+    <StyledImage
+      src={character.image}
+      alt={character.name}
+      loading="lazy"
+      width="300"
+      height="300"
+    />
+    <StyledTypography variant="h2" component="h2">
+      {character.name}
+    </StyledTypography>
+  </StyledItem>
+);
 
 const StyledItem = styled('li')`
   position: relative;
@@ -35,9 +41,6 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
   padding: '8px',
 }));
 
-CharactersListItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-};
+CharactersListItem.propTypes = characterPropTypes;
 
 export default CharactersListItem;
