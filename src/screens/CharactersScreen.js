@@ -42,12 +42,12 @@ const CharactersScreen = () => {
   const { results, info } = data;
 
   return (
-    <>
+    <section>
       <Pagination pagesQuantity={info.pages} page={page} setPage={setPage}>
         <CharactersList characters={results} />
       </Pagination>
       <Outlet />
-    </>
+    </section>
   );
 };
 

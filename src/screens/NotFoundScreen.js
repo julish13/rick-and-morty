@@ -1,5 +1,5 @@
 import React from 'react';
 
-const NotFoundScreen = () => <div>404 Not Found</div>;
+const NotFoundScreen = () => <section>404 Not Found</section>;
 
 export default NotFoundScreen;
