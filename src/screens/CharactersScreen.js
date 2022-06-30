@@ -4,11 +4,7 @@ import React, { useEffect, useCallback } from 'react';
 import { useImmer } from 'use-immer';
 import { useGetCharactersQuery } from '@redux';
 import { useSearchParams, useNavigate, useLocation, Outlet } from 'react-router-dom';
-import {
-  Pagination,
-  CharactersList,
-  // SearchForm
-} from '@components';
+import { Pagination, CharactersList, SearchForm } from '@components';
 
 const initialParamsValues = [
   ['name', ''],
@@ -45,18 +41,18 @@ const CharactersScreen = () => {
 
   const [query, setQuery] = useImmer(initialQueryState);
 
-  // const setFilter = useCallback(
-  //   (filter) => {
-  //     setQuery((draft) => {
-  //       initialParams.forEach((name) => {
-  //         if (name !== 'page') {
-  //           draft[name] = filter[name];
-  //         }
-  //       });
-  //     });
-  //   },
-  //   [setQuery]
-  // );
+  const setFilter = useCallback(
+    (filter) => {
+      setQuery((draft) => {
+        initialParams.forEach((name) => {
+          if (name !== 'page') {
+            draft[name] = filter[name];
+          }
+        });
+      });
+    },
+    [setQuery]
+  );
 
   const setPage = useCallback(
     (page) => {
@@ -90,10 +86,6 @@ const CharactersScreen = () => {
     });
   }, [validSearchParams]);
 
-  useEffect(() => {
-    console.log('chScreen', query, filterQuery);
-  }, [query]);
-
   if (isLoading) {
     return <p>is Loading...</p>;
   }
@@ -106,7 +98,7 @@ const CharactersScreen = () => {
 
   return (
     <section>
-      {/* <SearchForm query={filterQuery} setFilter={setFilter} /> */}
+      <SearchForm query={filterQuery} setQuery={setFilter} />
       <Pagination pagesQuantity={info.pages} page={Number(page)} setPage={setPage}>
         <CharactersList characters={results} />
       </Pagination>

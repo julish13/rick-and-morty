@@ -6,8 +6,8 @@ export const charactersApi = createApi({
   endpoints: (build) => ({
     getCharacters: build.query({
       query: ({ page = 1, query }) => {
-        const queryString = new URLSearchParams(query).toString();
-        console.log(query);
+        const filteredEntries = Object.entries(query).filter(([, value]) => value);
+        const queryString = new URLSearchParams(filteredEntries).toString();
         return `?page=${page}${queryString ? `&${queryString}` : ''}`;
       },
     }),

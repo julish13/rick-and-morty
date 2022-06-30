@@ -5,6 +5,7 @@ import Modal from './Layout/Modal';
 import CharactersList from './Characters/CharactersList';
 import CharactersListItem from './Characters/CharactersListItem';
 import CharacterDetails from './Characters/CharacterDetails';
+import SearchForm from './SearchForm';
 
 export {
   Layout,
@@ -14,4 +15,5 @@ export {
   LoadingSpinner,
   CharacterDetails,
   Modal,
+  SearchForm,
 };
