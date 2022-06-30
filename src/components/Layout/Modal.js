@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dialog, IconButton } from '@mui/material';
+import { Dialog, IconButton, DialogContent } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 const Modal = ({ children, onClose, open }) => {
   const result = (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={onClose} scroll="paper">
       <IconButton
         aria-label="close"
         onClick={onClose}
@@ -18,7 +18,9 @@ const Modal = ({ children, onClose, open }) => {
       >
         <CloseIcon />
       </IconButton>
-      {children}
+      <DialogContent sx={{ padding: 0 }} dividers>
+        {children}
+      </DialogContent>
     </Dialog>
   );
   return result;

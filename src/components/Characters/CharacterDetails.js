@@ -13,6 +13,7 @@ const CharacterDetails = ({ character }) => {
       sx={{
         width: { xs: '300px', sm: '550px' },
         backgroundColor: 'background.secondary',
+        paddingTop: '16px',
       }}
     >
       <CardHeader title={name} />
