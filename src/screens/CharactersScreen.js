@@ -1,35 +1,98 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable no-param-reassign */
+
+import React, { useEffect, useCallback } from 'react';
+import { useImmer } from 'use-immer';
 import { useGetCharactersQuery } from '@redux';
 import { useSearchParams, useNavigate, useLocation, Outlet } from 'react-router-dom';
-import { Pagination, CharactersList } from '@components';
+import {
+  Pagination,
+  CharactersList,
+  // SearchForm
+} from '@components';
+
+const initialParamsValues = [
+  ['name', ''],
+  ['species', ''],
+  ['type', ''],
+  ['status', ''],
+  ['gender', ''],
+  ['page', '1'],
+];
+
+const initialParams = initialParamsValues.map(([param]) => param);
+
+const getInitialQueryState = (searchParams) => {
+  const entries = initialParamsValues.map(([name, defaultValue]) => {
+    const value = searchParams.get(name);
+    return [name, value || defaultValue];
+  });
+  return Object.fromEntries(entries);
+};
+
+const validateSearchParams = (searchParams) => {
+  const entries = searchParams.entries();
+  const validEntries = Array.from(entries).filter(([param]) => initialParams.includes(param));
+  return new URLSearchParams(validEntries);
+};
 
 const CharactersScreen = () => {
   const [searchParams] = useSearchParams();
+  const validSearchParams = validateSearchParams(searchParams);
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const searchParamsPage = Number(searchParams.get('page'));
+  const initialQueryState = getInitialQueryState(searchParams);
 
-  const initialPage = searchParamsPage || 1;
-  const [page, setPage] = useState(initialPage);
-  // const [query, setQuery] = useState(query);
+  const [query, setQuery] = useImmer(initialQueryState);
 
-  const { data, isLoading, error } = useGetCharactersQuery(
-    page
-    // query
+  // const setFilter = useCallback(
+  //   (filter) => {
+  //     setQuery((draft) => {
+  //       initialParams.forEach((name) => {
+  //         if (name !== 'page') {
+  //           draft[name] = filter[name];
+  //         }
+  //       });
+  //     });
+  //   },
+  //   [setQuery]
+  // );
+
+  const setPage = useCallback(
+    (page) => {
+      setQuery((draft) => {
+        draft.page = String(page);
+      });
+    },
+    [setQuery]
   );
 
+  const { page, ...filterQuery } = query;
+
+  const { data, isLoading, error } = useGetCharactersQuery({ page, query: filterQuery });
+
   useEffect(() => {
+    const paramsString = validSearchParams.toString();
     if (!searchParams.get('page')) {
-      navigate(`${pathname}?page=${page}`, { replace: true });
+      navigate(`${pathname}?page=${page}${paramsString ? `&${paramsString}` : ''}`, {
+        replace: true,
+      });
     }
   }, []);
 
   useEffect(() => {
-    if (searchParamsPage) {
-      setPage(searchParamsPage);
-    }
-  }, [searchParamsPage]);
+    setQuery((draft) => {
+      Array.from(validSearchParams.entries).forEach(([param, value]) => {
+        if (draft[param] !== value) {
+          draft[param] = value;
+        }
+      });
+    });
+  }, [validSearchParams]);
+
+  useEffect(() => {
+    console.log('chScreen', query, filterQuery);
+  }, [query]);
 
   if (isLoading) {
     return <p>is Loading...</p>;
@@ -43,7 +106,8 @@ const CharactersScreen = () => {
 
   return (
     <section>
-      <Pagination pagesQuantity={info.pages} page={page} setPage={setPage}>
+      {/* <SearchForm query={filterQuery} setFilter={setFilter} /> */}
+      <Pagination pagesQuantity={info.pages} page={Number(page)} setPage={setPage}>
         <CharactersList characters={results} />
       </Pagination>
       <Outlet />

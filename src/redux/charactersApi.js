@@ -5,7 +5,11 @@ export const charactersApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://rickandmortyapi.com/api/character/' }),
   endpoints: (build) => ({
     getCharacters: build.query({
-      query: (page = 1, query = '') => `?page=${page}${query ? `&${query}` : ''}`,
+      query: ({ page = 1, query }) => {
+        const queryString = new URLSearchParams(query).toString();
+        console.log(query);
+        return `?page=${page}${queryString ? `&${queryString}` : ''}`;
+      },
     }),
     getCharacter: build.query({
       query: (id) => id,
