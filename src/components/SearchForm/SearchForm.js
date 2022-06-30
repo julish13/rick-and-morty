@@ -55,6 +55,15 @@ const SearchForm = ({ setQuery, query }) => {
     },
   });
 
+  const resetFilter = () => {
+    const resetedQuery = fields.reduce(
+      (acc, { name, initialValue }) => ({ ...acc, [name]: initialValue }),
+      {}
+    );
+    setQuery(normalizeValues(resetedQuery));
+    formik.resetForm();
+  };
+
   return (
     <form onSubmit={formik.handleSubmit}>
       {fields.map(({ name, type, values }) =>
@@ -64,8 +73,11 @@ const SearchForm = ({ setQuery, query }) => {
           <Select name={name} values={values} formik={formik} key={name} />
         )
       )}
-      <Button color="primary" variant="contained" type="submit">
+      <Button color="success" variant="contained" type="submit">
         {t(`searchForm.submit`)}
+      </Button>
+      <Button color="info" variant="contained" type="button" onClick={resetFilter}>
+        {t(`searchForm.reset`)}
       </Button>
     </form>
   );

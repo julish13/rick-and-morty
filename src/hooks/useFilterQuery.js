@@ -41,6 +41,8 @@ const useFilterQuery = (initialParamsValues) => {
       Object.entries(filter).forEach(([key, value]) => {
         if (value) {
           searchParams.set(key, value);
+        } else {
+          searchParams.delete(key);
         }
       });
       searchParams.set('page', defaultPage);
