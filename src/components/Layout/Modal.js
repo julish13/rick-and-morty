@@ -13,6 +13,7 @@ const Modal = ({ children, onClose, open }) => {
           position: 'absolute',
           right: 8,
           top: 8,
+          zIndex: 2,
           color: (theme) => theme.palette.grey[500],
         }}
       >
