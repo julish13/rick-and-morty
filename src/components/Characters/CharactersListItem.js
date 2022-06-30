@@ -16,7 +16,7 @@ const CharactersListItem = ({ character }) => {
 
   return (
     <StyledItem>
-      <Link to={`${pathname}/${character.id}${search}`} onClick={setActiveCharacter}>
+      <StyledLink to={`${pathname}/${character.id}${search}`} onClick={setActiveCharacter}>
         <StyledImage
           src={character.image}
           alt={character.name}
@@ -27,19 +27,21 @@ const CharactersListItem = ({ character }) => {
         <StyledTypography variant="h2" component="h2">
           {character.name}
         </StyledTypography>
-      </Link>
+      </StyledLink>
     </StyledItem>
   );
 };
 
-const StyledItem = styled('li')(({ theme }) => ({
+const StyledItem = styled('li')(() => ({
   position: 'relative',
+}));
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  display: 'block',
   borderRadius: '8px',
   overflow: 'hidden',
-
   '&:hover, &:active, &:focus': {
     zIndex: 1,
-    transform: 'scale(0.9)',
     boxShadow: `5px 5px 15px 5px ${theme.palette.text.secondary}`,
   },
 }));
@@ -61,6 +63,7 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
   backgroundColor: theme.palette.background.overlay,
   color: theme.palette.text.light,
   padding: '8px',
+  borderRadius: '0 0 8px 8px',
 }));
 
 CharactersListItem.propTypes = characterPropTypes;
