@@ -32,7 +32,7 @@ const validateSearchParams = (searchParams) => {
 };
 
 const CharactersScreen = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const validSearchParams = validateSearchParams(searchParams);
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -44,12 +44,20 @@ const CharactersScreen = () => {
   const setFilter = useCallback(
     (filter) => {
       setQuery((draft) => {
+        draft.page = 1;
         initialParams.forEach((name) => {
           if (name !== 'page') {
             draft[name] = filter[name];
           }
         });
       });
+      Object.entries(filter).forEach(([key, value]) => {
+        if (value) {
+          searchParams.set(key, value);
+        }
+      });
+      searchParams.set('page', 1);
+      setSearchParams(searchParams);
     },
     [setQuery]
   );
