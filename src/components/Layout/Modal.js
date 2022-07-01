@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Dialog, IconButton, DialogContent } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-const Modal = ({ children, onClose, open }) => {
+const Modal = ({ children, onClose, open = false }) => {
   const result = (
     <Dialog open={open} onClose={onClose} scroll="paper">
       <IconButton
@@ -32,9 +32,5 @@ export default Modal;
 Modal.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool,
-};
-
-Modal.defaultProps = {
-  open: false,
+  open: PropTypes.bool.isRequired,
 };
