@@ -30,7 +30,13 @@ const CharactersScreen = () => {
   return (
     <section>
       <SearchForm query={filterQuery} setQuery={setFilter} />
-      <Pagination pagesQuantity={info.pages} page={Number(page)} setPage={setPage}>
+      <Pagination
+        pagesQuantity={info.pages}
+        page={Number(page)}
+        setPage={setPage}
+        itemsQuantity={info.count}
+        itemsPerPage={results.length}
+      >
         <CharactersList characters={results} />
       </Pagination>
       <Outlet />

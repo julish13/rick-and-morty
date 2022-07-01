@@ -3,14 +3,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useLocation, useSearchParams } from 'react-router-dom';
-import { Pagination as MUIPagination, PaginationItem } from '@mui/material';
+import { Pagination as MuiPagination, PaginationItem } from '@mui/material';
 
-const Pagination = ({ pagesQuantity, page, setPage, children }) => {
+const Pagination = ({
+  pagesQuantity,
+  page,
+  setPage,
+  children,
+  maxItemsPerPage = 20,
+  itemsQuantity,
+  itemsPerPage,
+}) => {
   const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
+  const { t } = useTranslation();
+  const rangeStart = maxItemsPerPage * (page - 1);
+  const rangeEnd = rangeStart + itemsPerPage;
+
   const paginationElement = (
-    <MUIPagination
+    <MuiPagination
       count={pagesQuantity}
       page={page}
       onChange={(_, num) => setPage(num)}
@@ -27,17 +40,26 @@ const Pagination = ({ pagesQuantity, page, setPage, children }) => {
     />
   );
   return (
-    <StyledPaginatioWrapper>
+    <StyledPaginationWrapper>
       {paginationElement}
+      <StyledPaginationRange>
+        {t('pagination.range', { start: rangeStart, end: rangeEnd, quantity: itemsQuantity })}
+      </StyledPaginationRange>
       {children}
       {paginationElement}
-    </StyledPaginatioWrapper>
+    </StyledPaginationWrapper>
   );
 };
 
-const StyledPaginatioWrapper = styled('div')`
+const StyledPaginationWrapper = styled('p')`
   display: flex;
   flex-direction: column;
+`;
+
+const StyledPaginationRange = styled('div')`
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 8px;
 `;
 
 Pagination.propTypes = {
@@ -45,6 +67,9 @@ Pagination.propTypes = {
   page: PropTypes.number.isRequired,
   setPage: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
+  itemsQuantity: PropTypes.number.isRequired,
+  itemsPerPage: PropTypes.number.isRequired,
+  maxItemsPerPage: PropTypes.number.isRequired,
 };
 
 export default Pagination;
