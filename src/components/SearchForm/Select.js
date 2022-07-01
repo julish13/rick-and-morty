@@ -7,9 +7,10 @@ import { formikInjectedPropsTypes } from '@lib/PropTypes/PropTypesValues';
 const Select = ({ formik, name, values }) => {
   const { t } = useTranslation();
   return (
-    <FormControl>
+    <FormControl sx={{ width: '100%' }}>
       <InputLabel id={`${name}Label`}>{t(`searchForm.selects.${name}.label`)}</InputLabel>
       <MuiSelect
+        size="small"
         labelId={`${name}Label`}
         id={name}
         label={t(`searchForm.selects.${name}.label`)}

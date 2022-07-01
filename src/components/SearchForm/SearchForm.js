@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import Select from './Select';
 import TextInput from './TextInput';
 
@@ -66,19 +66,23 @@ const SearchForm = ({ setQuery, query }) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      {fields.map(({ name, type, values }) =>
-        type === 'input' ? (
-          <TextInput name={name} formik={formik} key={name} />
-        ) : (
-          <Select name={name} values={values} formik={formik} key={name} />
-        )
-      )}
-      <Button color="success" variant="contained" type="submit">
-        {t(`searchForm.submit`)}
-      </Button>
-      <Button color="info" variant="contained" type="button" onClick={resetFilter}>
-        {t(`searchForm.reset`)}
-      </Button>
+      <Grid container direction="column" gap={1} sx={{ maxWidth: '300px', marginX: 'auto' }}>
+        {fields.map(({ name, type, values }) => (
+          <Grid item>
+            {type === 'input' ? (
+              <TextInput name={name} formik={formik} key={name} />
+            ) : (
+              <Select name={name} values={values} formik={formik} key={name} />
+            )}{' '}
+          </Grid>
+        ))}
+        <Button color="success" variant="contained" type="submit">
+          {t(`searchForm.submit`)}
+        </Button>
+        <Button color="info" variant="contained" type="button" onClick={resetFilter}>
+          {t(`searchForm.reset`)}
+        </Button>
+      </Grid>
     </form>
   );
 };

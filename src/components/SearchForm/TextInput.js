@@ -8,10 +8,12 @@ const TextInput = ({ formik, name }) => {
   const { t } = useTranslation();
   return (
     <TextField
+      fullWidth
       key={name}
       id={name}
       label={t(`searchForm.inputs.${name}`)}
       variant="outlined"
+      size="small"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...formik.getFieldProps(name)}
     />
