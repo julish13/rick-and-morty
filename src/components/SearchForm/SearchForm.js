@@ -44,7 +44,7 @@ const normalizeValues = (values) =>
       return acc;
     }, values);
 
-const SearchForm = ({ setQuery, query }) => {
+const SearchForm = ({ setQuery, query, disabled }) => {
   const { t } = useTranslation();
   const initialValues = setInitialValues(query);
   const formik = useFormik({
@@ -56,12 +56,12 @@ const SearchForm = ({ setQuery, query }) => {
   });
 
   const resetFilter = () => {
-    const resetedQuery = fields.reduce(
+    const values = fields.reduce(
       (acc, { name, initialValue }) => ({ ...acc, [name]: initialValue }),
       {}
     );
-    setQuery(normalizeValues(resetedQuery));
-    formik.resetForm();
+    setQuery(normalizeValues(values));
+    formik.resetForm({ values });
   };
 
   return (
@@ -76,10 +76,16 @@ const SearchForm = ({ setQuery, query }) => {
             )}{' '}
           </Grid>
         ))}
-        <Button color="success" variant="contained" type="submit">
+        <Button color="success" variant="contained" type="submit" disabled={disabled}>
           {t(`searchForm.submit`)}
         </Button>
-        <Button color="info" variant="contained" type="button" onClick={resetFilter}>
+        <Button
+          color="info"
+          variant="contained"
+          type="button"
+          onClick={resetFilter}
+          disabled={disabled}
+        >
           {t(`searchForm.reset`)}
         </Button>
       </Grid>
@@ -88,6 +94,7 @@ const SearchForm = ({ setQuery, query }) => {
 };
 
 SearchForm.propTypes = {
+  disabled: PropTypes.bool.isRequired,
   setQuery: PropTypes.func.isRequired,
   query: PropTypes.shape({
     name: PropTypes.string.isRequired,

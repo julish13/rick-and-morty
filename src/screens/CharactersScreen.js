@@ -1,7 +1,7 @@
 import React from 'react';
-import { useGetCharactersQuery } from '@redux';
 import { Outlet } from 'react-router-dom';
-import { Pagination, CharactersList, SearchForm } from '@components';
+import { Pagination, CharactersList, SearchForm, LoadingSpinner, ErrorMessage } from '@components';
+import { useGetCharactersQuery } from '@redux';
 import { useFilterQuery } from '@hooks';
 
 const initialParamsValues = {
@@ -14,22 +14,28 @@ const initialParamsValues = {
 };
 
 const CharactersScreen = () => {
-  const { page, filterQuery, setFilter, setPage } = useFilterQuery(initialParamsValues);
-  const { data, isLoading, error } = useGetCharactersQuery({ page, query: filterQuery });
+  const { page, filter, setFilter, setPage } = useFilterQuery(initialParamsValues);
+  const { data, isLoading, error, isFetching } = useGetCharactersQuery({
+    page,
+    query: filter,
+  });
 
-  if (isLoading) {
-    return <p>is Loading...</p>;
+  let content;
+
+  if (isLoading || isFetching) {
+    content = <LoadingSpinner />;
   }
 
   if (error) {
-    return <p>error</p>;
+    const { status } = error;
+
+    content = <ErrorMessage status={status} />;
   }
 
-  const { results, info } = data;
+  if (!isLoading && !isFetching && !error) {
+    const { info, results } = data;
 
-  return (
-    <section>
-      <SearchForm query={filterQuery} setQuery={setFilter} />
+    content = (
       <Pagination
         pagesQuantity={info.pages}
         page={Number(page)}
@@ -39,6 +45,13 @@ const CharactersScreen = () => {
       >
         <CharactersList characters={results} />
       </Pagination>
+    );
+  }
+
+  return (
+    <section>
+      <SearchForm query={filter} setQuery={setFilter} disabled={isLoading || isFetching} />
+      {content}
       <Outlet />
     </section>
   );

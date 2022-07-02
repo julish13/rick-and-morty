@@ -25,20 +25,20 @@ const useFilterQuery = (initialParamsValues) => {
   const initialQueryState = getInitialQueryState(validSearchParams, initialParamsValues);
 
   const [query, setQuery] = useImmer(initialQueryState);
-  const { page, ...filterQuery } = query;
+  const { page, ...filter } = query;
 
   const setFilter = useCallback(
-    (filter) => {
+    (filterValues) => {
       const { page: defaultPage } = initialParamsValues;
       setQuery((draft) => {
         draft.page = defaultPage;
         initialParams.forEach((name) => {
           if (name !== 'page') {
-            draft[name] = filter[name];
+            draft[name] = filterValues[name];
           }
         });
       });
-      Object.entries(filter).forEach(([key, value]) => {
+      Object.entries(filterValues).forEach(([key, value]) => {
         if (value) {
           searchParams.set(key, value);
         } else {
@@ -79,7 +79,7 @@ const useFilterQuery = (initialParamsValues) => {
     });
   }, [validSearchParams]);
 
-  return { page, filterQuery, setFilter, setPage };
+  return { page, filter, setFilter, setPage };
 };
 
 export default useFilterQuery;
