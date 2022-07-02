@@ -68,7 +68,7 @@ const SearchForm = ({ setQuery, query }) => {
     <form onSubmit={formik.handleSubmit}>
       <Grid container direction="column" gap={1} sx={{ maxWidth: '300px', marginX: 'auto' }}>
         {fields.map(({ name, type, values }) => (
-          <Grid item>
+          <Grid item key={name}>
             {type === 'input' ? (
               <TextInput name={name} formik={formik} key={name} />
             ) : (
