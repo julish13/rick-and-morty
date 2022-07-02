@@ -33,6 +33,7 @@
           ["@screens", "./src/screens"],
           ["@redux", "./src/redux"],
           ["@hooks", "./src/hooks"],
+          ["@const", "./src/const"],
           ["@lib", "./lib"]
         ]
       }

@@ -4,17 +4,8 @@ import { Pagination, CharactersList, SearchForm, LoadingSpinner, ErrorMessage } 
 import { useGetCharactersQuery } from '@redux';
 import { useFilterQuery } from '@hooks';
 
-const initialParamsValues = {
-  gender: '',
-  name: '',
-  species: '',
-  status: '',
-  type: '',
-  page: '1',
-};
-
 const CharactersScreen = () => {
-  const { page, filter, setFilter, setPage } = useFilterQuery(initialParamsValues);
+  const { page, filter, setFilter, setPage } = useFilterQuery();
   const { data, isLoading, error, isFetching } = useGetCharactersQuery({
     page,
     query: filter,

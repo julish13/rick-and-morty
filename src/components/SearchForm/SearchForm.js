@@ -3,31 +3,32 @@ import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Button, Grid } from '@mui/material';
+import { filterFields } from '@const';
 import Select from './Select';
 import TextInput from './TextInput';
 
-const fields = [
-  { name: 'name', type: 'input', initialValue: '' },
-  { name: 'species', type: 'input', initialValue: '' },
-  { name: 'type', type: 'input', initialValue: '' },
-  {
-    name: 'status',
-    type: 'select',
-    initialValue: 'any',
-    values: ['alive', 'dead', 'unknown', 'any'],
-  },
-  {
-    name: 'gender',
-    type: 'select',
-    initialValue: 'any',
-    values: ['female', 'male', 'genderless', 'unknown', 'any'],
-  },
-];
+const selectInitialFormValue = 'any';
+
+const formFields = filterFields
+  .filter(({ type }) => type !== 'page')
+  .map((field) => {
+    if (field.type === 'select') {
+      return { ...field, initialValue: selectInitialFormValue };
+    }
+    return field;
+  });
 
 const setInitialValues = (query) => {
-  const entries = fields.map(({ name, initialValue }) => {
-    const paramValue = Object.hasOwn(query, name) && query[name];
-    return [name, paramValue || initialValue];
+  const entries = formFields.map(({ name, initialValue, type, values }) => {
+    let value;
+    if (type === 'select') {
+      value =
+        (Object.hasOwn(query, name) && values.includes(query[name]) && query[name]) || initialValue;
+    }
+    if (type === 'input') {
+      value = (Object.hasOwn(query, name) && query[name]) || initialValue;
+    }
+    return [name, value];
   });
 
   const initialValues = Object.fromEntries(entries);
@@ -35,7 +36,7 @@ const setInitialValues = (query) => {
 };
 
 const normalizeValues = (values) =>
-  fields
+  formFields
     .filter(({ type }) => type === 'select')
     .reduce((acc, { name }) => {
       if (values[name] === 'any') {
@@ -56,7 +57,7 @@ const SearchForm = ({ setQuery, query, disabled }) => {
   });
 
   const resetFilter = () => {
-    const values = fields.reduce(
+    const values = formFields.reduce(
       (acc, { name, initialValue }) => ({ ...acc, [name]: initialValue }),
       {}
     );
@@ -67,7 +68,7 @@ const SearchForm = ({ setQuery, query, disabled }) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Grid container direction="column" gap={1} sx={{ maxWidth: '300px', marginX: 'auto' }}>
-        {fields.map(({ name, type, values }) => (
+        {formFields.map(({ name, type, values }) => (
           <Grid item key={name}>
             {type === 'input' ? (
               <TextInput name={name} formik={formik} key={name} />

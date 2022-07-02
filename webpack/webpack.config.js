@@ -18,6 +18,7 @@ module.exports = {
       '@redux': path.resolve(__dirname, '../src', 'redux'),
       '@hooks': path.resolve(__dirname, '../src', 'hooks'),
       '@lib': path.resolve(__dirname, '../lib'),
+      '@const': path.resolve(__dirname, '../src', 'const'),
       '@mui/styled-engine': '@mui/styled-engine-sc',
     },
   },
