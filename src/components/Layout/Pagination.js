@@ -51,15 +51,13 @@ const Pagination = ({
   );
 };
 
-const StyledPaginationWrapper = styled('p')`
+const StyledPaginationWrapper = styled('div')`
   display: flex;
   flex-direction: column;
 `;
 
-const StyledPaginationRange = styled('div')`
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 8px;
+const StyledPaginationRange = styled('p')`
+  margin: 0 auto 8px;
 `;
 
 Pagination.propTypes = {
