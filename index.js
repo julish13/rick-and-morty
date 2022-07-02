@@ -13,14 +13,16 @@ import i18n from '@lib/i18n';
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <I18nextProvider i18n={i18n}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <App />
-        </ThemeProvider>
-      </I18nextProvider>
-    </BrowserRouter>
-  </Provider>
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <I18nextProvider i18n={i18n}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <App />
+          </ThemeProvider>
+        </I18nextProvider>
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
 );
