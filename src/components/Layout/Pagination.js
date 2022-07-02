@@ -12,7 +12,7 @@ const Pagination = ({
   page,
   setPage,
   children,
-  maxItemsPerPage = 20,
+  maxItemsPerPage,
   itemsQuantity,
   itemsPerPage,
 }) => {
@@ -69,7 +69,11 @@ Pagination.propTypes = {
   children: PropTypes.node.isRequired,
   itemsQuantity: PropTypes.number.isRequired,
   itemsPerPage: PropTypes.number.isRequired,
-  maxItemsPerPage: PropTypes.number.isRequired,
+  maxItemsPerPage: PropTypes.number,
+};
+
+Pagination.defaultProps = {
+  maxItemsPerPage: 20,
 };
 
 export default Pagination;
