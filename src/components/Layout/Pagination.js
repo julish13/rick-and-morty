@@ -19,8 +19,8 @@ const Pagination = ({
   const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
   const { t } = useTranslation();
-  const rangeStart = maxItemsPerPage * (page - 1);
-  const rangeEnd = rangeStart + itemsPerPage;
+  const rangeStart = maxItemsPerPage * (page - 1) + 1;
+  const rangeEnd = rangeStart + itemsPerPage - 1;
 
   const paginationElement = (
     <MuiPagination
