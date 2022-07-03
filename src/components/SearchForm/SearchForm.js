@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { Button, Grid } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import { filterFields } from '@const';
 import Select from './Select';
 import TextInput from './TextInput';
@@ -67,6 +67,9 @@ const SearchForm = ({ setQuery, query, disabled }) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
+      <Typography component="h2" align="center" gutterBottom>
+        {t('searchForm.title')}
+      </Typography>
       <Grid container direction="column" gap={1} sx={{ maxWidth: '300px', marginX: 'auto' }}>
         {formFields.map(({ name, type, values }) => (
           <Grid item key={name}>
