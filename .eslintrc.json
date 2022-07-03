@@ -31,7 +31,7 @@
           ["@src", "./src"],
           ["@components", "./src/components"],
           ["@screens", "./src/screens"],
-          ["@redux", "./src/redux"],
+          ["@store", "./src/store"],
           ["@hooks", "./src/hooks"],
           ["@const", "./src/const"],
           ["@lib", "./lib"]

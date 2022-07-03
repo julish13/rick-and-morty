@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Pagination, CharactersList, SearchForm, LoadingSpinner, ErrorMessage } from '@components';
-import { useGetCharactersQuery } from '@redux';
+import { useGetCharactersQuery } from '@store';
 import { useFilterQuery } from '@hooks';
 
 const CharactersScreen = () => {

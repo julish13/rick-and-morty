@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Modal, CharacterDetails, LoadingSpinner } from '@components';
-import { useGetCharacterQuery } from '@redux';
+import { useGetCharacterQuery } from '@store';
 
 const normalizeData = (data) => ({
   image: data.image,

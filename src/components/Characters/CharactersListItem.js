@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Typography } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
 import { characterPropTypes } from '@lib/PropTypes/PropTypesValues';
-import { activeCharacterActions } from '@redux';
+import { activeCharacterActions } from '@store';
 
 const CharactersListItem = ({ character }) => {
   const dispatch = useDispatch();

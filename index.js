@@ -7,7 +7,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import App from '@src/App';
 import theme from '@src/theme';
-import { store } from '@redux';
+import { store } from '@store';
 import i18n from '@lib/i18n';
 
 const container = document.getElementById('root');

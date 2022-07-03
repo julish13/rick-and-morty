@@ -16,7 +16,7 @@ module.exports = {
       '@src': path.resolve(__dirname, '../src'),
       '@components': path.resolve(__dirname, '../src', 'components'),
       '@screens': path.resolve(__dirname, '../src', 'screens'),
-      '@redux': path.resolve(__dirname, '../src', 'redux'),
+      '@store': path.resolve(__dirname, '../src', 'store'),
       '@hooks': path.resolve(__dirname, '../src', 'hooks'),
       '@lib': path.resolve(__dirname, '../lib'),
       '@const': path.resolve(__dirname, '../src', 'const'),
