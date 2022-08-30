@@ -1,6 +1,9 @@
 # rick-and-morty application
 
-The React SPA integration of the [Rick and Morty API](https://rickandmortyapi.com/).
+[rick-and-morty](https://rick-and-morty-one-teal.vercel.app/) is the React SPA based on the [Rick and Morty API](https://rickandmortyapi.com/).
+
+![image](https://user-images.githubusercontent.com/16277885/187493183-3bba5258-8d0a-424a-917d-ad8a9de776fe.png)
+
 
 ### Features:
 
@@ -14,10 +17,6 @@ The React SPA integration of the [Rick and Morty API](https://rickandmortyapi.co
 - Material UI, styled-components;
 - formik, yup, react-i18next;
 - ESlint, Prettier, Husky, Webpack, Vercel.
-
-## Deployment:
-
-https://rick-and-morty-one-teal.vercel.app/
 
 ## Dev server:
 
